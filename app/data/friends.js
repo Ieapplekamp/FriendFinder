@@ -49,6 +49,23 @@ let friends = [
                 "4",
                 "5"
             ]
+    },
+    {
+        "name": "Hanson",
+        "photo": "https://media1.giphy.com/media/c8RrC4dCLScNO/200.webp?cid=790b76110386f6a3f68c018486d5b2b2a19af78c6e6ae2eb&rid=200.webp",
+        "scores":
+            [
+                "2",
+                "4",
+                "5",
+                "4",
+                "5",
+                "1",
+                "2",
+                "3",
+                "2",
+                "5"
+            ]
     }
 ];
 
