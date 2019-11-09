@@ -1,19 +1,55 @@
-// var express = require("express");
-// var path = require("path");
+var totalScore = 0
+var bestScore = 100
+var bestFriendID = 0
 
-var friendData = require("../data/friends.js");
+var friendsData = require("../data/friends.js");
+
+// module.exports = function(app) {
+//     app.get("/api/friends", function(req, res) {
+//         return res.json(friendsData);
+//     });
+//     app.post("/api/friends", function(req, res) {
+//         var newFriend = req.body;
+//         friendsData.push(newFriend);
+//         res.json(newFriend);
+//     });
+// };
 
 module.exports = function(app) {
-    app.get("/api/friends", function(req, res) {
-        return res.json(friendData);
-    });
-    app.post("/api/friends", function(req, res) {
-        var newFriend = req.body;
-        friendData.push(newFriend);
-        res.json(newFriend);
-    });
-};
 
-// Should have 
-// A GET route with the url `/api/friends`. This will be used to display a JSON of all possible friends.
-// A POST routes `/api/friends`. This will be used to handle incoming survey results. This route will also be used to handle the compatibility logic.
+    app.get("/api/friends", function(req, res){
+        res.json(friendsData);
+    });
+
+    app.post("/api/friends", function(req, res){
+        totalScore = 0;
+        bestScore = 100;
+        bestFriendID = 0;
+        for (i = 0; i < req.body.scores.length; i ++){
+            req.body.scores[i] = parseInt(req.body.scores[i])
+        }
+        newFriendsMatch(req.body)
+
+        friendsData.push(req.body)
+        
+        res.send({
+            bestFriendName: friendsData[bestFriendID].name,
+            bestFriendPic: friendsData[bestFriendID].picture
+        });
+    })
+
+}
+
+function newFriendsMatch(newFriend){
+        for (i = 0; i < friendsData.length; i ++){
+            var j = 0
+            totalScore = 0;
+            for (j = 0; j < friendsData[i].scores.length; j ++){
+                totalScore += Math.abs(friendsData[i].scores[j] - newFriend.scores[j])
+            }
+            if (j === 10 && totalScore < bestScore){
+                bestScore = totalScore;
+                bestFriendID = i;
+            }
+        }
+}
