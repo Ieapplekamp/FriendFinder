@@ -34,7 +34,7 @@ module.exports = function(app) {
         
         res.send({
             bestFriendName: friendsData[bestFriendID].name,
-            bestFriendPic: friendsData[bestFriendID].picture
+            bestFriendPic: friendsData[bestFriendID].photo
         });
     })
 
