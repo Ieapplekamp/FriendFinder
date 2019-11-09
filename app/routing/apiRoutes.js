@@ -1,55 +1,59 @@
-var totalScore = 0
-var bestScore = 100
-var bestFriendID = 0
-
 var friendsData = require("../data/friends.js");
-
-// module.exports = function(app) {
-//     app.get("/api/friends", function(req, res) {
-//         return res.json(friendsData);
-//     });
-//     app.post("/api/friends", function(req, res) {
-//         var newFriend = req.body;
-//         friendsData.push(newFriend);
-//         res.json(newFriend);
-//     });
-// };
-
-module.exports = function(app) {
-
-    app.get("/api/friends", function(req, res){
+// fucking shoot me
+module.exports = function (app) {
+    // get the json
+    app.get("/api/friends", function(req, res) {
         res.json(friendsData);
     });
-
-    app.post("/api/friends", function(req, res){
-        totalScore = 0;
-        bestScore = 100;
-        bestFriendID = 0;
-        for (i = 0; i < req.body.scores.length; i ++){
-            req.body.scores[i] = parseInt(req.body.scores[i])
-        }
-        newFriendsMatch(req.body)
-
-        friendsData.push(req.body)
+    // post the friends data
+    app.post("/api/friends", function (req, res) {
+            
+        var totalDifference = 0;
         
-        res.send({
-            bestFriendName: friendsData[bestFriendID].name,
-            bestFriendPic: friendsData[bestFriendID].photo
+        var bestMatch = {
+            name: "",
+            photo: "",
+            friendDifference: 100
+        };
+    
+        var userData = req.body;
+        var userScores = userData.scores;
+    
+        var x = userScores.map(function(item) {
+            return parseInt(item, 10);
         });
-    })
 
-}
+        userData = {
+            name: req.body.name,
+            photo: req.body.photo,
+            scores: x
+        };
 
-function newFriendsMatch(newFriend){
-        for (i = 0; i < friendsData.length; i ++){
-            var j = 0
-            totalScore = 0;
-            for (j = 0; j < friendsData[i].scores.length; j ++){
-                totalScore += Math.abs(friendsData[i].scores[j] - newFriend.scores[j])
-            }
-            if (j === 10 && totalScore < bestScore){
-                bestScore = totalScore;
-                bestFriendID = i;
+        var sum = x.reduce((a, b) => a + b, 0);
+    
+        for (var i = 0; i < friendsData.length; i++) {
+            
+            totalDifference = 0;
+
+            var bestMatchScore = friendsData[i].scores.reduce((a, b) => a + b, 0);
+            console.log(bestMatchScore);
+            
+            totalDifference += Math.abs(sum - bestMatchScore);
+            console.log('----' + totalDifference);
+
+            if (totalDifference <= bestMatch.friendDifference) {
+
+                bestMatch.name = friendsData[i].name;
+                bestMatch.photo = friendsData[i].photo;
+                bestMatch.friendDifference = totalDifference;
             }
         }
-}
+
+        res.send({
+            bestFriendName: bestMatch.name,
+            bestFriendPic: bestMatch.photo
+        });
+        // console.log(bestMatch);
+        friendsData.push(userData);
+    });
+};

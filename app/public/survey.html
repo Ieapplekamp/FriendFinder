@@ -15,6 +15,9 @@
         background-color: #003366;
         font-family: Courier, monospace
     }
+    button {
+        margin: 2% 0 2% 0;
+    }
 </style>
 <body>
 
@@ -157,11 +160,11 @@
 
     </section>
 
-    
+    <div class="container">
         <p>Your ideal friend is <strong><span id="newBuddy"></span></strong>!</p>
         
         <img id="buddyPic" src="">
-    
+    </div>
     
     <footer class="container">
         <hr>
@@ -195,15 +198,13 @@
             };
             // Post request that sends survey data to server
             $.post("/api/friends", newFriend, function(data) {
-                console.log(data);
-                console.log(data.bestFriendName);
+                // console.log(data);
+                // console.log(data.bestFriendName);
                 
                 $("#newBuddy").html(data.bestFriendName);
                 $("#buddyPic").attr("src", data.bestFriendPic);
             });
         }); 
-    
-
 
     </script>
 </body>
