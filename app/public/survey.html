@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"> 
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
     <title>Document</title>
 </head>
 <style>
     body {
-        background-color: #003366;
+        background-color: #4c41ad;
         font-family: Courier, monospace;
     }
     button {
@@ -29,10 +29,10 @@
 
     <div class = "container">
         <h4>Name</h4>
-        <input type="text" id="name" class="form-control" placeholder= "You Have To" required>
+        <input type="text" id="name" class="form-control" placeholder="You Have To" required>
 
         <h4>Picture</h4>
-        <input type="text" id="picture" class="form-control" placeholder= "You Have To" required>
+        <input type="text" id="picture" class="form-control" placeholder="You Have To" required>
     </div>
 
     <section class="container">
@@ -157,16 +157,28 @@
             </select>
         </div>
 
-        <button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#match">Submit</button>
+        <button id="submit" type="submit" class="btn-primary">Submit</button>
+
+        <div class="modal fade" id="modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-center">You're Ideal Partner In Crime</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h3 id="newBuddy"></h3>
+                        <img id="buddyPic" src="" style="max-width: 350px;">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </section>
 
-    <div class="container">
-        <p>Your ideal friend is <span id="newBuddy"></span></p>
-        
-        <img id="buddyPic" src="">
-    </div>
-    
     <footer class="container">
         <hr>
         <p>
@@ -176,9 +188,15 @@
     </footer>
 
 
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
-   
-   $("#submit").click(function(event){
+
+    $(document).ready(function() {
+
+        $("#submit").click(function(event){
             
             var newFriend = {
                 name: $("#name").val().trim(),
@@ -196,7 +214,7 @@
                     $("#questionTen").val(),
                 ]
             };
-
+            
             if ($('.selected').val() === null) {
                 swal ("Hold up..", "Please fill out ALL the information", "error", {
                     buttons: false,
@@ -217,14 +235,13 @@
             }
             // Post request that sends survey data to server
             $.post("/api/friends", newFriend, function(data) {
-                // console.log(data);
-                // console.log(data.bestFriendName);
-                
-                $("#newBuddy").html(data.bestFriendName + "!");
+            
+                $("#newBuddy").text(data.bestFriendName + "!");
                 $("#buddyPic").attr("src", data.bestFriendPic);
+                $("#modal").modal('toggle');
             });
         }); 
-
+    });
     </script>
 </body>
 </html>
