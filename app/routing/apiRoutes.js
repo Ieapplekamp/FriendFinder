@@ -36,7 +36,7 @@ module.exports = function (app) {
             totalDifference = 0;
 
             var bestMatchScore = friendsData[i].scores.reduce((a, b) => a + b);
-            
+            console.log(bestMatchScore);
             totalDifference += Math.abs(sum - bestMatchScore);
             console.log(friendsData[i].name + totalDifference);
 
@@ -44,7 +44,7 @@ module.exports = function (app) {
 
                 bestMatch.name = friendsData[i].name;
                 bestMatch.photo = friendsData[i].photo;
-                bestMatch.friendDifference = totalDifference;
+                // bestMatch.friendDifference = totalDifference;
             }
         }
 
