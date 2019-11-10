@@ -12,7 +12,7 @@ let friends = [
     {
         "name": "Brenda",
         "photo": "https://media1.giphy.com/media/wJMPeLQNRgSZO/giphy.gif",
-        "scores": [1,2,1,2,1,2,1,2,1,2]
+        "scores": [2,2,2,2,2,2,2,2,2,2]
     },
     {
         "name": "Hanson",

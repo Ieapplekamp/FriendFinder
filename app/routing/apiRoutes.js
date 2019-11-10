@@ -13,7 +13,7 @@ module.exports = function (app) {
         var bestMatch = {
             name: "",
             photo: "",
-            friendDifference: 40
+            friendDifference: 50
         };
     
         var userData = req.body;
@@ -44,7 +44,7 @@ module.exports = function (app) {
 
                 bestMatch.name = friendsData[i].name;
                 bestMatch.photo = friendsData[i].photo;
-                // bestMatch.friendDifference = totalDifference;
+                bestMatch.friendDifference = totalDifference;
             }
         }
 
