@@ -20,8 +20,8 @@ let friends = [
         "scores": [1,1,1,1,1,1,1,1,1,1]
     },
     {
-        "name": "Scream",
-        "photo": "http://giphygifs.s3.amazonaws.com/media/MIrZUO7tW4QPS/giphy.gif",
+        "name": "Shorty",
+        "photo": "https://data.whicdn.com/images/23933007/original.gif",
         "scores": [4,4,4,4,4,4,4,4,4,4]
     }
 ];
