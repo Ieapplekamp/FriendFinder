@@ -1,5 +1,5 @@
 var friendsData = require("../data/friends.js");
-// fucking shoot me
+
 module.exports = function (app) {
     // get the json
     app.get("/api/friends", function(req, res) {
@@ -13,30 +13,29 @@ module.exports = function (app) {
         var bestMatch = {
             name: "",
             photo: "",
-            friendDifference: 100
+            friendDifference: 40
         };
     
         var userData = req.body;
         var userScores = userData.scores;
-    
-        var x = userScores.map(function(item) {
-            return parseInt(item, 10);
+        
+        var x = userScores.map(function(scores) {
+            return parseInt(scores);
         });
-
+        
         userData = {
             name: req.body.name,
             photo: req.body.photo,
             scores: x
         };
 
-        var sum = x.reduce((a, b) => a + b, 0);
-    
+        var sum = x.reduce((a, b) => a + b);
+        console.log(sum);
         for (var i = 0; i < friendsData.length; i++) {
             
             totalDifference = 0;
 
-            var bestMatchScore = friendsData[i].scores.reduce((a, b) => a + b, 0);
-            console.log(bestMatchScore);
+            var bestMatchScore = friendsData[i].scores.reduce((a, b) => a + b);
             
             totalDifference += Math.abs(sum - bestMatchScore);
             console.log('----' + totalDifference);
