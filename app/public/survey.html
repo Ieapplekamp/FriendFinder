@@ -11,6 +11,7 @@
     
     <title>Document</title>
 </head>
+
 <style>
     body {
         background-color: #4c41ad;
@@ -19,23 +20,29 @@
     button {
         margin: 2% 0 2% 0;
     }
+    a {
+       color: white;
+    }
+    section {
+        font-size: 1.2em;
+    }
 </style>
+
 <body>
 
-    <header class="container">
-        <h1 class="text-center jumbotron">Survey Questions</h1>
-        
+    <header>
+        <h1 class="container text-center jumbotron">A Kinda Scary Date <i class="fas fa-ghost mt-1"></i><hr></h1>
     </header>
 
-    <div class = "container">
-        <h4>Name</h4>
-        <input type="text" id="name" class="form-control" placeholder="You Have To" required>
+    <div class = "container card pt-3 pb-4">
+        <h4><strong>Name:</strong> <i class="fas fa-signature float-right"></i></h4>
+        <input type="text" id="name" class="form-control" placeholder="Get Creative" required>
 
-        <h4>Picture</h4>
-        <input type="text" id="picture" class="form-control" placeholder="You Have To" required>
+        <h4 class="mt-2"><strong>Picture:</strong> <i class="fas fa-camera-retro float-right"></i></h4>
+        <input type="text" id="picture" class="form-control" placeholder="You're Required" required>
     </div>
 
-    <section class="container">
+    <section class="container text-center">
 
         <div class="mt-4">
                 <p><strong>1. Tiny Hands.</strong></p>
@@ -98,7 +105,7 @@
         </div>
 
         <div class="mt-4">
-                <p><strong>6. If you already committed, would you rob them?</strong></p>
+                <p><strong>6. If you already committed a murder, would you rob them?</strong></p>
             <select class="selected" id="questionSix">
                 <option value="false" selected disabled>Options</option>
                 <option value="1">Strongly Disagree</option>
@@ -115,14 +122,14 @@
                 <option value="false" selected disabled>Options</option>
                 <option value="1">Run</option>
                 <option value="2">Hide</option>
-                <option value="3">Hide and Pray They Get Her White Ass</option>
+                <option value="3">Hide and Pray They Get Their Ass</option>
                 <option value="4">Save Your Friend</option>
                 <option value="5">Make Sure The Zombie Gets Them First</option>
             </select>
         </div>
 
         <div class="mt-4">
-                <p><strong>8. Saw bitch slaps you, how do you respond?</strong></p>
+                <p><strong>8. You're on Tv and Saw b*tch slaps you, how do you respond?</strong></p>
             <select class="selected" id="questionEight">
                 <option value="false" selected disabled>Options</option>
                 <option value="1">Cry</option>
@@ -157,7 +164,7 @@
             </select>
         </div>
 
-        <button id="submit" type="submit" class="btn-primary">Submit</button>
+        <button id="submit" type="submit" class="btn btn-light mt-5">Submit</button>
 
         <div class="modal fade" id="modal" role="dialog">
             <div class="modal-dialog">
@@ -182,8 +189,8 @@
     <footer class="container">
         <hr>
         <p>
-            <i class="fas fa-user-friends"><a href="/api/friends"> API Friends |</a></i>
-            <i class="fab fa-github-alt"><a href="https://github.com/Ieapplekamp/FriendFinder" target="_blank"> GitHub Repo</a></i>
+            <i class="fas fa-user-friends"><a href="/api/friends"> <strong>API Friends</strong> </a></i>
+            <i class="fab fa-github-alt float-right"><a href="https://github.com/Ieapplekamp/FriendFinder" target="_blank"> <strong>GitHub Repo</strong></a></i>
         </p>
     </footer>
 
@@ -215,20 +222,20 @@
                 ]
             };
             
-            if ($('.selected').val() === null) {
-                swal ("Hold up..", "Please fill out ALL the information", "error", {
+            
+            if (newFriend.name === '' || newFriend.picture === '') {
+                swal ("Exucse Me...", "What part about REQUIRED was not understood?", "error", {
                     buttons: false,
                     timer: 3000,
+                    
                 });
                 event.preventDefault();
                 return false;
             }
-            
-            if (newFriend.name === '' || newFriend.photo === '') {
-                swal ("Hold up..", "Please fill out ALL the information", "error", {
+            if ($('.selected').val() === null) {
+                swal ("Calm Down..", "Please fill out ALL the information", "error", {
                     buttons: false,
                     timer: 3000,
-                    
                 });
                 event.preventDefault();
                 return false;
