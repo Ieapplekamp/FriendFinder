@@ -169,7 +169,9 @@
 
         <button id="submit" type="submit" class="btn btn-light mt-5">Submit</button>
 
-        <div class="modal fade" id="modal" role="dialog">
+    </section>
+
+        <div class="modal fade" id="working" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -179,15 +181,13 @@
                         </button>
                     </div>
 
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
                         <h3 id="newBuddy"></h3>
                         <img id="buddyPic" src="" style="max-width: 350px;">
                     </div>
                 </div>
             </div>
         </div>
-
-    </section>
 
     <footer class="container">
         <hr>
@@ -226,29 +226,29 @@
             };
             
             
-            if (newFriend.name === '' || newFriend.picture === '') {
-                swal ("Exucse Me...", "What part about REQUIRED was not understood?", "error", {
-                    buttons: false,
-                    timer: 3000,
+            // if (newFriend.name === '' || newFriend.picture === '') {
+            //     swal ("Exucse Me...", "What part about REQUIRED was not understood?", "error", {
+            //         buttons: false,
+            //         timer: 3000,
                     
-                });
-                event.preventDefault();
-                return false;
-            }
-            if ($('.selected').val() === null) {
-                swal ("Calm Down..", "Please fill out ALL the information", "error", {
-                    buttons: false,
-                    timer: 3000,
-                });
-                event.preventDefault();
-                return false;
-            }
+            //     });
+            //     event.preventDefault();
+            //     return false;
+            // }
+            // if ($('.selected').val() === null) {
+            //     swal ("Calm Down..", "Please fill out ALL the information", "error", {
+            //         buttons: false,
+            //         timer: 3000,
+            //     });
+            //     event.preventDefault();
+            //     return false;
+            // }
             // Post request that sends survey data to server
             $.post("/api/friends", newFriend, function(data) {
             
-                $("#newBuddy").text(data.bestFriendName + "!");
+                $("#newBuddy").html(data.bestFriendName + "!");
                 $("#buddyPic").attr("src", data.bestFriendPic);
-                $("#modal").modal('toggle');
+                $("#working").modal('toggle');
             });
         }); 
     });
