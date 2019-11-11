@@ -226,23 +226,23 @@
             };
             
             
-            // if (newFriend.name === '' || newFriend.picture === '') {
-            //     swal ("Exucse Me...", "What part about REQUIRED was not understood?", "error", {
-            //         buttons: false,
-            //         timer: 3000,
+            if (newFriend.name === '' || newFriend.picture === '') {
+                swal ("Exucse Me...", "What part about REQUIRED was not understood?", "error", {
+                    buttons: false,
+                    timer: 3000,
                     
-            //     });
-            //     event.preventDefault();
-            //     return false;
-            // }
-            // if ($('.selected').val() === null) {
-            //     swal ("Calm Down..", "Please fill out ALL the information", "error", {
-            //         buttons: false,
-            //         timer: 3000,
-            //     });
-            //     event.preventDefault();
-            //     return false;
-            // }
+                });
+                event.preventDefault();
+                return false;
+            }
+            if ($('.selected').val() === null) {
+                swal ("Calm Down..", "Please fill out ALL the information", "error", {
+                    buttons: false,
+                    timer: 3000,
+                });
+                event.preventDefault();
+                return false;
+            }
             // Post request that sends survey data to server
             $.post("/api/friends", newFriend, function(data) {
             
